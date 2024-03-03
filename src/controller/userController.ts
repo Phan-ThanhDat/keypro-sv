@@ -49,8 +49,9 @@ export default async function userController(fastify: FastifyInstance) {
         path: "/",
         httpOnly: true,
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        domain: process.env.COOKIE_DOMAIN,
+        secure: true,
         sameSite: "none",
-        maxAge: 30 * 24 * 60 * 60,
       });
 
       return { accessToken: token, user: payload };
@@ -72,7 +73,13 @@ export default async function userController(fastify: FastifyInstance) {
     "/logout",
     { preHandler: [fastify.authenticate] },
     async function (_, reply) {
-      reply.clearCookie("access_token");
+      reply.clearCookie("access_token", {
+        path: "/",
+        httpOnly: true,
+        domain: process.env.COOKIE_DOMAIN,
+        secure: true,
+        sameSite: "none",
+      });
 
       return { message: "Logged out" };
     },

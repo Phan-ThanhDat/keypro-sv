@@ -62,7 +62,7 @@ server.register(fCookie, {
 server.decorate(
   "authenticate",
   async (req: FastifyRequest, reply: FastifyReply) => {
-    const token = req.cookies.access_token;
+    const token = req.cookies.access_token || req.headers.authorization;
 
     if (!token) {
       return reply.status(401).send({ message: "Authentication required" });
