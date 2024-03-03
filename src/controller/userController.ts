@@ -48,8 +48,9 @@ export default async function userController(fastify: FastifyInstance) {
       reply.setCookie("access_token", token, {
         path: "/",
         httpOnly: true,
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-        sameSite: "strict",
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        sameSite: "none",
+        maxAge: 30 * 24 * 60 * 60,
       });
 
       return { accessToken: token, user: payload };

@@ -162,7 +162,7 @@ async function seedPoints(client) {
 }
 
 async function main() {
-  console.log("Seeding the database...");
+  console.log(`Connecting to the database at ${process.env.POSTGRES_HOST}...`);
   const pool = new Pool({
     connectionTimeoutMillis: 5000,
     host: process.env.POSTGRES_HOST,
@@ -173,7 +173,7 @@ async function main() {
     idleTimeoutMillis: 5000,
   });
   const client = await pool.connect();
-
+  console.log("Seeding the database...");
   await seedUsers(client);
   await seedPoints(client);
 
