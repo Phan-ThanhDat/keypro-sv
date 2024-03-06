@@ -163,6 +163,15 @@ async function seedPoints(client) {
 
 async function main() {
   console.log(`Connecting to the database at ${process.env.POSTGRES_HOST}...`);
+  console.log({
+    connectionTimeoutMillis: 5000,
+    host: process.env.POSTGRES_HOST,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD || "",
+    database: process.env.POSTGRES_DATABASE,
+    port: Number(process.env.POSTGRES_PORT || 5432),
+    idleTimeoutMillis: 5000,
+  });
   const pool = new Pool({
     connectionTimeoutMillis: 5000,
     host: process.env.POSTGRES_HOST,

@@ -52,6 +52,7 @@ export default async function userController(fastify: FastifyInstance) {
         domain: process.env.COOKIE_DOMAIN,
         secure: true,
         sameSite: "none",
+        maxAge: 1000 * 60 * 60 * 24 * 7,
       });
 
       return { accessToken: token, user: payload };
@@ -76,7 +77,7 @@ export default async function userController(fastify: FastifyInstance) {
       reply.clearCookie("access_token", {
         path: "/",
         httpOnly: true,
-        domain: process.env.COOKIE_DOMAIN,
+        // domain: process.env.COOKIE_DOMAIN,
         secure: true,
         sameSite: "none",
       });

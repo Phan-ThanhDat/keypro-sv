@@ -6,11 +6,25 @@ I built a simple server for the test. Due to it being an MVP and just an extra b
 
 ### Enviroment
 
-Copy `.env.example` to `.env` and change configure
+Copy `.env.example` to `.env` and change configure. If you use the default docker-compose.yml for the development then you don't need to change anything.
 
 ### Development
 
-Run seed data for development
+Optional: Start the docker compose
+
+```bash
+docker compose up --detach
+
+# After done the development
+
+docker compose down
+
+# Clean up
+
+docker compose up
+```
+
+Run seed data postgres for development
 
 ```bash
 node scripts/seed.mjs
